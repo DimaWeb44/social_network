@@ -29,21 +29,23 @@ let store: StoreType = {
             ],
         }
     },
-    getState () {return this._state},
-    _callSubscriber () {
+    getState() {
+        return this._state
+    },
+    _callSubscriber() {
         console.log("change store")
     },
-    addPost  ()  {
+    addPost() {
         let newPost: PostsType = {id: v1(), message: this._state.profilePage.massageForNewPost, likesCount: 0}
         this._state.profilePage.posts.push(newPost)
         this._state.profilePage.massageForNewPost = ""
         this._callSubscriber()
     },
-    changeNewText (newText: string) {
+    changeNewText(newText: string) {
         this._state.profilePage.massageForNewPost = newText
         this._callSubscriber()
     },
-    subscribe (observer) {
+    subscribe(observer) {
         this._callSubscriber = observer
     },
 }
@@ -52,7 +54,7 @@ export  type  StoreType = {
     _state: RootStateType
     changeNewText: (newText: string) => void
     addPost: () => void
-    subscribe: (observer: ()=> void) => void
+    subscribe: (observer: () => void) => void
     getState: () => RootStateType
     _callSubscriber: () => void
 }

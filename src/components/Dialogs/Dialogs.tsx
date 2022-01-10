@@ -11,8 +11,8 @@ type StatePropsType = {
 
 const Dialogs = (props: StatePropsType) => {
 
-    let dialogsElements = props.state.dialogs.map((d:any) => <DialogItem name={d.name} id={d.id}/>)
-    let messagesElements = props.state.messages.map((m:any) => <Message message={m.message} id={m.id}/>)
+    let dialogsElements = props.state.dialogs.map((d: any) => <DialogItem name={d.name} id={d.id}/>)
+    let messagesElements = props.state.messages.map((m: any) => <Message message={m.message} id={m.id}/>)
 
     return (
         <div className={s.dialogs}>

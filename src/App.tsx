@@ -9,24 +9,24 @@ import {RootStateType} from "./redux/state";
 
 type StatePropsType = {
     state: RootStateType
-    addPost: ()=> void
-    changeNewText: (newText:string)=>void
+    addPost: () => void
+    changeNewText: (newText: string) => void
 }
 
 function App(props: StatePropsType) {
 
     return (<div className="app-wrapper">
-                <Header/>
-                <Navbar/>
-                <div className="app-wrapper-content">
-                    <Routes>
-                        <Route path="/profile/*" element={<Profile profilePage={props.state.profilePage}
-                                                                   addPost={props.addPost}
-                                                                   changeNewText={props.changeNewText}/>}/>
-                        <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogsPage}/>}/>
-                    </Routes>
-                </div>
+            <Header/>
+            <Navbar/>
+            <div className="app-wrapper-content">
+                <Routes>
+                    <Route path="/profile/*" element={<Profile profilePage={props.state.profilePage}
+                                                               addPost={props.addPost}
+                                                               changeNewText={props.changeNewText}/>}/>
+                    <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogsPage}/>}/>
+                </Routes>
             </div>
+        </div>
     );
 }
 
