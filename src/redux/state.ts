@@ -29,11 +29,14 @@ let store: StoreType = {
             ],
         }
     },
+    _callSubscriber() {
+        console.log("change store")
+    },
     getState() {
         return this._state
     },
-    _callSubscriber() {
-        console.log("change store")
+    subscribe(observer) {
+        this._callSubscriber = observer
     },
     addPost() {
         let newPost: PostsType = {id: v1(), message: this._state.profilePage.massageForNewPost, likesCount: 0}
@@ -44,9 +47,6 @@ let store: StoreType = {
     changeNewText(newText: string) {
         this._state.profilePage.massageForNewPost = newText
         this._callSubscriber()
-    },
-    subscribe(observer) {
-        this._callSubscriber = observer
     },
 }
 
