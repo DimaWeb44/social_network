@@ -9,7 +9,7 @@ import {RootStateType} from "./redux/state";
 
 type StatePropsType = {
     state: RootStateType
-    dispatch: (action: {type: string, newText: string}) => void
+    dispatch: (action: { type: string, newText: string }) => void
 }
 
 function App(props: StatePropsType) {

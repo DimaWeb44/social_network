@@ -1,4 +1,5 @@
 import React, {ChangeEvent} from 'react';
+import {addPostActionCreator, newTextChangeHandlerActionCreator} from '../../../redux/state';
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 
@@ -7,13 +8,10 @@ const MyPosts = (props: any) => {
     let postsElement = props.posts.map((p: any) => <Post message={p.message} likesCount={p.likesCount} id={p.id}/>)
 
     const addPost = () => {
-        props.dispatch({type: 'ADD-POST'})
+        props.dispatch(addPostActionCreator())
     }
 
-    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => props.dispatch({
-            type: 'CHANGE-NEW-TEXT',
-            newText: e.currentTarget.value
-        })
+    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => props.dispatch(newTextChangeHandlerActionCreator(e))
 
     return <div className={s.postsBloc}>
         <h3>My post</h3>

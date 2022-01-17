@@ -14,7 +14,8 @@ const Profile = (props: StatePropsType) => {
         <MyPosts posts={props.profilePage.posts}
                  dispatch={props.dispatch}
                  message={props.profilePage.massageForNewPost}/>
-    </div>)}
+    </div>)
+}
 
 
 export default Profile;

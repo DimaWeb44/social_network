@@ -1,4 +1,8 @@
+import {ChangeEvent} from "react";
 import {v1} from "uuid";
+
+const ADD_POST = 'ADD-POST'
+const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT'
 
 
 let store: StoreType = {
@@ -39,24 +43,32 @@ let store: StoreType = {
         this._callSubscriber = observer
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST'){
+        if (action.type === ADD_POST) {
             let newPost: PostsType = {id: v1(), message: this._state.profilePage.massageForNewPost, likesCount: 0}
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.massageForNewPost = ""
             this._callSubscriber()
-        } else if (action.type === 'CHANGE-NEW-TEXT'){
+        } else if (action.type === CHANGE_NEW_TEXT) {
             this._state.profilePage.massageForNewPost = action.newText
             this._callSubscriber()
         }
     }
 }
 
+export const addPostActionCreator = () => ({type: ADD_POST})
+
+export const newTextChangeHandlerActionCreator = (e: ChangeEvent<HTMLTextAreaElement>) => ({
+    type: CHANGE_NEW_TEXT,
+    newText: e.currentTarget.value
+})
+
+
 export  type  StoreType = {
     _state: RootStateType
     _callSubscriber: () => void
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
-    dispatch: (action: {type: string, newText: string}) => void
+    dispatch: (action: { type: string, newText: string }) => void
 }
 
 export type DialogsType = {
