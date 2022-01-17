@@ -7,10 +7,14 @@ const MyPosts = (props: any) => {
     let postsElement = props.posts.map((p: any) => <Post message={p.message} likesCount={p.likesCount} id={p.id}/>)
 
     const addPost = () => {
-        props.addPost()
+        props.dispatch({type: 'ADD-POST'})
     }
 
-    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => props.changeNewText(e.currentTarget.value)
+    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => props.dispatch({
+            type: 'CHANGE-NEW-TEXT',
+            newText: e.currentTarget.value
+        })
+
     return <div className={s.postsBloc}>
         <h3>My post</h3>
         <div>

@@ -38,26 +38,27 @@ let store: StoreType = {
     subscribe(observer) {
         this._callSubscriber = observer
     },
-    addPost() {
-        let newPost: PostsType = {id: v1(), message: this._state.profilePage.massageForNewPost, likesCount: 0}
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.massageForNewPost = ""
-        this._callSubscriber()
-    },
-    changeNewText(newText: string) {
-        this._state.profilePage.massageForNewPost = newText
-        this._callSubscriber()
-    },
+    dispatch(action) {
+        if (action.type === 'ADD-POST'){
+            let newPost: PostsType = {id: v1(), message: this._state.profilePage.massageForNewPost, likesCount: 0}
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.massageForNewPost = ""
+            this._callSubscriber()
+        } else if (action.type === 'CHANGE-NEW-TEXT'){
+            this._state.profilePage.massageForNewPost = action.newText
+            this._callSubscriber()
+        }
+    }
 }
 
 export  type  StoreType = {
     _state: RootStateType
-    changeNewText: (newText: string) => void
-    addPost: () => void
+    _callSubscriber: () => void
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
-    _callSubscriber: () => void
+    dispatch: (action: {type: string, newText: string}) => void
 }
+
 export type DialogsType = {
     id: number
     name: string
@@ -83,6 +84,5 @@ export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
-
 
 export default store
