@@ -9,7 +9,7 @@ import {RootStateType} from "./redux/state";
 
 type StatePropsType = {
     state: RootStateType
-    dispatch: (action: { type: string, newText: string }) => void
+    dispatch: any
 }
 
 function App(props: StatePropsType) {
@@ -21,7 +21,8 @@ function App(props: StatePropsType) {
                 <Routes>
                     <Route path="/profile/*" element={<Profile profilePage={props.state.profilePage}
                                                                dispatch={props.dispatch}/>}/>
-                    <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogsPage}/>}/>
+                    <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogsPage}
+                                                               dispatch={props.dispatch}/>}/>
                 </Routes>
             </div>
         </div>

@@ -2,8 +2,9 @@ import {ChangeEvent} from "react";
 import {v1} from "uuid";
 
 const ADD_POST = 'ADD-POST'
-const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT'
-
+const UPDATE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT'
+const UPDATE_NEW_MESSAGE_TEXT = 'CHANGE-NEW-MESSAGE-TEXT'
+const SEND_MESSAGE = 'SEND-MESSAGE'
 
 let store: StoreType = {
     _state: {
@@ -25,12 +26,13 @@ let store: StoreType = {
                 {id: 6, name: "Ben"}
             ],
             messages: [
-                {id: 1, message: "Hi"},
-                {id: 2, message: "Go"},
-                {id: 3, message: "Rrrr"},
-                {id: 4, message: "Gut"},
-                {id: 5, message: "Yes"},
+                {id: '1', message: "Hi"},
+                {id: '2', message: "Go"},
+                {id: '3', message: "Rrrr"},
+                {id: '4', message: "Gut"},
+                {id: '5', message: "Yes"},
             ],
+            textForNewMessage: "",
         }
     },
     _callSubscriber() {
@@ -42,14 +44,22 @@ let store: StoreType = {
     subscribe(observer) {
         this._callSubscriber = observer
     },
-    dispatch(action) {
+    dispatch(action: any) {
         if (action.type === ADD_POST) {
             let newPost: PostsType = {id: v1(), message: this._state.profilePage.massageForNewPost, likesCount: 0}
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.massageForNewPost = ""
             this._callSubscriber()
-        } else if (action.type === CHANGE_NEW_TEXT) {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.massageForNewPost = action.newText
+            this._callSubscriber()
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+            this._state.dialogsPage.textForNewMessage = action.newTextMessage
+            this._callSubscriber()
+        } else if (action.type === SEND_MESSAGE) {
+            let newMessage: MessagesType = {id: v1(), message: this._state.dialogsPage.textForNewMessage}
+            this._state.dialogsPage.messages.push(newMessage)
+            this._state.dialogsPage.textForNewMessage = ""
             this._callSubscriber()
         }
     }
@@ -58,10 +68,16 @@ let store: StoreType = {
 export const addPostActionCreator = () => ({type: ADD_POST})
 
 export const newTextChangeHandlerActionCreator = (e: ChangeEvent<HTMLTextAreaElement>) => ({
-    type: CHANGE_NEW_TEXT,
+    type: UPDATE_NEW_POST_TEXT,
     newText: e.currentTarget.value
 })
 
+export const updateNewMessageTextActionCreator = (e: ChangeEvent<HTMLTextAreaElement>) => ({
+    type: UPDATE_NEW_MESSAGE_TEXT,
+    newTextMessage: e.currentTarget.value
+})
+
+export const sendMessageActionCreator = () => ({type: SEND_MESSAGE})
 
 export  type  StoreType = {
     _state: RootStateType
@@ -70,13 +86,12 @@ export  type  StoreType = {
     getState: () => RootStateType
     dispatch: (action: { type: string, newText: string }) => void
 }
-
 export type DialogsType = {
     id: number
     name: string
 }
 export type MessagesType = {
-    id: number
+    id: string
     message: string
 }
 export type PostsType = {
@@ -91,6 +106,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
+    textForNewMessage: string
 }
 export type RootStateType = {
     profilePage: ProfilePageType

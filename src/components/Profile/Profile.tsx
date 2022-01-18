@@ -5,7 +5,7 @@ import {ProfilePageType} from "../../redux/state";
 
 type StatePropsType = {
     profilePage: ProfilePageType
-    dispatch: (action: { type: string, newText: string }) => void
+    dispatch: any
 }
 
 const Profile = (props: StatePropsType) => {
