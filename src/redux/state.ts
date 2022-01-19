@@ -4,11 +4,6 @@ import dialogsReducer from "./dialogs-reducer";
 import profileReducer from "./profile-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT'
-const UPDATE_NEW_MESSAGE_TEXT = 'CHANGE-NEW-MESSAGE-TEXT'
-const SEND_MESSAGE = 'SEND-MESSAGE'
-
 let store: StoreType = {
     _state: {
         profilePage: {
@@ -55,18 +50,6 @@ let store: StoreType = {
         this._callSubscriber()
     }
 }
-
-export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST})
-export const newTextChangeHandlerActionCreator = (e: ChangeEvent<HTMLTextAreaElement>): NewTextChangeHandlerActionType => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: e.currentTarget.value
-})
-export const updateNewMessageTextActionCreator = (e: ChangeEvent<HTMLTextAreaElement>): UpdateNewMessageTextActionType => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    newTextMessage: e.currentTarget.value
-})
-export const sendMessageActionCreator = (): SendMessageActionType => ({type: SEND_MESSAGE})
-
 export  type  StoreType = {
     _state: RootStateType
     _callSubscriber: () => void
@@ -106,18 +89,18 @@ export type ActionsType =
     | AddPostActionType
     | UpdateNewMessageTextActionType
     | SendMessageActionType
-type AddPostActionType = {
+export type AddPostActionType = {
     type: 'ADD-POST'
 }
-type NewTextChangeHandlerActionType = {
+export type NewTextChangeHandlerActionType = {
     type: 'CHANGE-NEW-POST-TEXT'
     newText: string
 }
-type UpdateNewMessageTextActionType = {
+export type UpdateNewMessageTextActionType = {
     type: 'CHANGE-NEW-MESSAGE-TEXT'
     newTextMessage: string
 }
-type SendMessageActionType = {
+export type SendMessageActionType = {
     type: 'SEND-MESSAGE'
 }
 

@@ -1,4 +1,6 @@
-const sidebarReducer = (state, action) => {
+import { ActionsType } from "./state"
+
+const sidebarReducer = (state: any, action: ActionsType) => {
 
     return state
 }
