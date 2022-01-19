@@ -44,7 +44,7 @@ let store: StoreType = {
     subscribe(observer) {
         this._callSubscriber = observer
     },
-    dispatch(action: any) {
+    dispatch(action: ActionsType) {
         if (action.type === ADD_POST) {
             let newPost: PostsType = {id: v1(), message: this._state.profilePage.massageForNewPost, likesCount: 0}
             this._state.profilePage.posts.push(newPost)
@@ -65,26 +65,23 @@ let store: StoreType = {
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST})
-
-export const newTextChangeHandlerActionCreator = (e: ChangeEvent<HTMLTextAreaElement>) => ({
+export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST})
+export const newTextChangeHandlerActionCreator = (e: ChangeEvent<HTMLTextAreaElement>): NewTextChangeHandlerActionType => ({
     type: UPDATE_NEW_POST_TEXT,
     newText: e.currentTarget.value
 })
-
-export const updateNewMessageTextActionCreator = (e: ChangeEvent<HTMLTextAreaElement>) => ({
+export const updateNewMessageTextActionCreator = (e: ChangeEvent<HTMLTextAreaElement>): UpdateNewMessageTextActionType => ({
     type: UPDATE_NEW_MESSAGE_TEXT,
     newTextMessage: e.currentTarget.value
 })
-
-export const sendMessageActionCreator = () => ({type: SEND_MESSAGE})
+export const sendMessageActionCreator = (): SendMessageActionType => ({type: SEND_MESSAGE})
 
 export  type  StoreType = {
     _state: RootStateType
     _callSubscriber: () => void
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
-    dispatch: (action: { type: string, newText: string }) => void
+    dispatch: (action: ActionsType) => void
 }
 export type DialogsType = {
     id: number
@@ -111,6 +108,25 @@ export type DialogsPageType = {
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
+}
+export type ActionsType =
+    NewTextChangeHandlerActionType
+    | AddPostActionType
+    | UpdateNewMessageTextActionType
+    | SendMessageActionType
+type AddPostActionType = {
+    type: 'ADD-POST'
+}
+type NewTextChangeHandlerActionType = {
+    type: 'CHANGE-NEW-POST-TEXT'
+    newText: string
+}
+type UpdateNewMessageTextActionType = {
+    type: 'CHANGE-NEW-MESSAGE-TEXT'
+    newTextMessage: string
+}
+type SendMessageActionType = {
+    type: 'SEND-MESSAGE'
 }
 
 export default store

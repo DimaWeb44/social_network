@@ -5,11 +5,11 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
-import {RootStateType} from "./redux/state";
+import {ActionsType, RootStateType} from "./redux/state";
 
 type StatePropsType = {
     state: RootStateType
-    dispatch: any
+    dispatch: (action: ActionsType) => void
 }
 
 function App(props: StatePropsType) {

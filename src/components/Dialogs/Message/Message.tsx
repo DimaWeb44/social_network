@@ -9,7 +9,6 @@ const Message = (props: MessagesType) => {
             {props.message}
         </div>
     )
-
 }
 
 export default Message
