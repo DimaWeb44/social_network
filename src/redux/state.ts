@@ -1,5 +1,8 @@
 import {ChangeEvent} from "react";
 import {v1} from "uuid";
+import dialogsReducer from "./dialogs-reducer";
+import profileReducer from "./profile-reducer";
+import sidebarReducer from "./sidebar-reducer";
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT'
@@ -33,7 +36,8 @@ let store: StoreType = {
                 {id: '5', message: "Yes"},
             ],
             textForNewMessage: "",
-        }
+        },
+        sidebar: {}
     },
     _callSubscriber() {
         console.log("change store")
@@ -45,23 +49,10 @@ let store: StoreType = {
         this._callSubscriber = observer
     },
     dispatch(action: ActionsType) {
-        if (action.type === ADD_POST) {
-            let newPost: PostsType = {id: v1(), message: this._state.profilePage.massageForNewPost, likesCount: 0}
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.massageForNewPost = ""
-            this._callSubscriber()
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.massageForNewPost = action.newText
-            this._callSubscriber()
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.dialogsPage.textForNewMessage = action.newTextMessage
-            this._callSubscriber()
-        } else if (action.type === SEND_MESSAGE) {
-            let newMessage: MessagesType = {id: v1(), message: this._state.dialogsPage.textForNewMessage}
-            this._state.dialogsPage.messages.push(newMessage)
-            this._state.dialogsPage.textForNewMessage = ""
-            this._callSubscriber()
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        this._callSubscriber()
     }
 }
 
@@ -108,6 +99,7 @@ export type DialogsPageType = {
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
+    sidebar: any
 }
 export type ActionsType =
     NewTextChangeHandlerActionType
