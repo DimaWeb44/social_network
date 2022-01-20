@@ -5,9 +5,9 @@ import {ActionsType, AddPostActionType, NewTextChangeHandlerActionType, PostsTyp
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT'
 export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST})
-export const newTextChangeHandlerActionCreator = (e: ChangeEvent<HTMLTextAreaElement>): NewTextChangeHandlerActionType => ({
+export const newTextChangeHandlerActionCreator = (text: string): NewTextChangeHandlerActionType => ({
     type: UPDATE_NEW_POST_TEXT,
-    newText: e.currentTarget.value
+    newText: text
 })
 
 

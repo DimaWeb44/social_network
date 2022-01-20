@@ -4,9 +4,9 @@ import {ActionsType, DialogsPageType, MessagesType, SendMessageActionType, Updat
 
 const UPDATE_NEW_MESSAGE_TEXT = 'CHANGE-NEW-MESSAGE-TEXT'
 const SEND_MESSAGE = 'SEND-MESSAGE'
-export const updateNewMessageTextActionCreator = (e: ChangeEvent<HTMLTextAreaElement>): UpdateNewMessageTextActionType => ({
+export const updateNewMessageTextActionCreator = (text: string): UpdateNewMessageTextActionType => ({
     type: UPDATE_NEW_MESSAGE_TEXT,
-    newTextMessage: e.currentTarget.value
+    newTextMessage: text
 })
 
 let initialState = {
