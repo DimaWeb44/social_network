@@ -2,8 +2,7 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsPageType, StoreType} from "../../redux/store";
-import {sendMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
+import {DialogsPageType} from "../../redux/store";
 
 type DialogsPropsType = {
     newMessages: (text: string) => void
@@ -13,8 +12,8 @@ type DialogsPropsType = {
 
 const Dialogs = (props: DialogsPropsType) => {
     let state = props.dialogsPage
-    let dialogsElements = state.dialogs.map((d: any) => <DialogItem name={d.name} id={d.id}/>)
-    let messagesElements = state.messages.map((m: any) => <Message message={m.message} id={m.id}/>)
+    let dialogsElements = state.dialogs.map((d: any) => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    let messagesElements = state.messages.map((m: any) => <Message key={m.id} message={m.message} id={m.id}/>)
 
     const newMessagesChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value

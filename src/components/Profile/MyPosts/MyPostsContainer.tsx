@@ -1,28 +1,28 @@
-import { connect } from 'http2';
-import React, {ChangeEvent} from 'react';
+import {connect} from 'react-redux';
+import React from 'react';
 import {addPostActionCreator, newTextChangeHandlerActionCreator} from '../../../redux/profile-reducer';
-import { AppStateType } from '../../../redux/redux-store';
 import MyPosts from './MyPosts';
 
 
-let mapStateToProps = (state: AppStateType) => {
-    return{
-        posts: state.profilePage.posts,
-        message: state.profilePage.massageForNewPost
+let mapStateToProps = (store: any) => {
+    return {
+        posts: store.profilePage.posts,
+        message: store.profilePage.massageForNewPost
     }
 }
-let mapDispatchToprops = (dispatch: any) => {
-    return{
+let mapDispatchToProps = (dispatch: any) => {
+    return {
         addPost: () => {
             dispatch(addPostActionCreator())
         },
         newTextChangeHandler: (text: string) => {
+            debugger
             dispatch(newTextChangeHandlerActionCreator(text))
         }
     }
 }
 
-const MyPostsContaner = connect(mapStateToProps, mapDispatchToprops)(MyPosts)
+const MyPostsContaner = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 export default MyPostsContaner
 
 

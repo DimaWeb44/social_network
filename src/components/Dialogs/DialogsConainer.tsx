@@ -1,17 +1,16 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import {sendMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
-import { connect } from "http2";
-import { AppStateType } from "../../redux/redux-store";
+import {connect} from "react-redux";
 
 
-let mapStateToProps = (state: AppStateType) => {
-    return{
-        dialogsPage: state.dialogsPage
+let mapStateToProps = (store: any) => {
+    return {
+        dialogsPage: store.dialogsPage
     }
 }
 let mapDispatchToprops = (dispatch: any) => {
-    return{
+    return {
         sendMessage: () => {
             dispatch(sendMessageActionCreator())
         },

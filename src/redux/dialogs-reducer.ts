@@ -1,6 +1,11 @@
-import { ChangeEvent } from "react"
 import {v1} from "uuid"
-import {ActionsType, DialogsPageType, MessagesType, SendMessageActionType, UpdateNewMessageTextActionType} from "./store"
+import {
+    ActionsType,
+    DialogsPageType,
+    MessagesType,
+    SendMessageActionType,
+    UpdateNewMessageTextActionType
+} from "./store"
 
 const UPDATE_NEW_MESSAGE_TEXT = 'CHANGE-NEW-MESSAGE-TEXT'
 const SEND_MESSAGE = 'SEND-MESSAGE'
@@ -32,14 +37,17 @@ export const sendMessageActionCreator = (): SendMessageActionType => ({type: SEN
 
 export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType) => {
     switch (action.type) {
-        case SEND_MESSAGE:
+        case SEND_MESSAGE: {
             let newMessage: MessagesType = {id: v1(), message: state.textForNewMessage}
-            state.messages.push(newMessage)
-            state.textForNewMessage = ""
-            return state
-        case UPDATE_NEW_MESSAGE_TEXT:
-            state.textForNewMessage = action.newTextMessage
-            return state
+            return {
+                ...state,
+                textForNewMessage: '',
+                messages: [...state.messages, newMessage]
+            }
+        }
+        case UPDATE_NEW_MESSAGE_TEXT: {
+            return {...state, textForNewMessage: action.newTextMessage}
+        }
         default:
             return state
     }
