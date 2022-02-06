@@ -1,5 +1,5 @@
 import {v1} from "uuid"
-import {ActionsType, AddPostActionType, NewTextChangeHandlerActionType, PostsType, ProfilePageType} from "./store"
+import {ActionsType, AddPostActionType, NewTextChangeHandlerActionType} from "./store"
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT'
@@ -9,6 +9,12 @@ export const newTextChangeHandlerActionCreator = (text: string): NewTextChangeHa
     newText: text
 })
 
+export  type InitialStateType = typeof initialState
+export type PostType = {
+    id: string
+    message: string
+    likesCount: number
+}
 
 let initialState = {
     massageForNewPost: "",
@@ -16,13 +22,13 @@ let initialState = {
         {id: '1', message: "Hi Dima", likesCount: 21},
         {id: '1', message: "Hi Max", likesCount: 33},
         {id: '1', message: "Hi Don", likesCount: 22}
-    ],
+    ] as Array<PostType>,
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType) => {
+export const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case ADD_POST: {
-            let newPost: PostsType = {id: v1(), message: state.massageForNewPost, likesCount: 0}
+            let newPost: PostType = {id: v1(), message: state.massageForNewPost, likesCount: 0}
             return {
                 ...state,
                 massageForNewPost: "",

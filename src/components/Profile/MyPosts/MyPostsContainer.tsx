@@ -1,22 +1,35 @@
 import {connect} from 'react-redux';
 import React from 'react';
-import {addPostActionCreator, newTextChangeHandlerActionCreator} from '../../../redux/profile-reducer';
+import {addPostActionCreator, newTextChangeHandlerActionCreator, PostType} from '../../../redux/profile-reducer';
 import MyPosts from './MyPosts';
+import {AppStateType} from '../../../redux/redux-store';
+import {Dispatch} from 'redux';
 
 
-let mapStateToProps = (store: any) => {
+type MapStateToPropsType = {
+    posts: Array<PostType>
+    message: string
+}
+
+type MapDispatchToPropsType = {
+    addPost: () => void
+    newTextChangeHandler: (text: string) => void
+}
+
+export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
+
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        posts: store.profilePage.posts,
-        message: store.profilePage.massageForNewPost
+        posts: state.profilePage.posts,
+        message: state.profilePage.massageForNewPost
     }
 }
-let mapDispatchToProps = (dispatch: any) => {
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         addPost: () => {
             dispatch(addPostActionCreator())
         },
         newTextChangeHandler: (text: string) => {
-            debugger
             dispatch(newTextChangeHandlerActionCreator(text))
         }
     }

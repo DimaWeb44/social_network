@@ -50,36 +50,36 @@ let store: StoreType = {
         this._callSubscriber()
     }
 }
-export  type  StoreType = {
+type  StoreType = {
     _state: RootStateType
     _callSubscriber: () => void
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
     dispatch: (action: ActionsType) => void
 }
-export type DialogsType = {
+ type DialogsType = {
     id: number
     name: string
 }
-export type MessagesType = {
+ type MessagesType = {
     id: string
     message: string
 }
-export type PostsType = {
+ type PostsType = {
     id: string
     message: string
     likesCount: number
 }
-export type ProfilePageType = {
+ type ProfilePageType = {
     posts: Array<PostsType>
     massageForNewPost: string
 }
-export type DialogsPageType = {
+ type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
     textForNewMessage: string
 }
-export type RootStateType = {
+ type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: any
