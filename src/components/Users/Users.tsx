@@ -1,21 +1,22 @@
-import axios from 'axios';
-import React, {Component, ReactNode} from 'react';
+import React from 'react';
 import s from './Users.module.css'
 import userPhoto from '../../assets/images/icon.png'
-import {UsersPropsType} from './UsersContainer';
 
 
-class Users extends Component <UsersPropsType> {
-
-    componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            this.props.setUsers(response.data.items)})
+const Users = (props: any)  => {
+    let pageCount = Math.ceil(props.totalUserCount / props.pageSize)
+    let page = []
+    for (let i=1; i <= pageCount; i++){
+        page.push(i)
     }
-
-    render(): ReactNode {
         return <div>
+            <div>
+                {page.map((p) => {
+                    return  <span onClick={()=>props.onPageChanget(p)} className = {props.currentPage === p ? s.selectedPage: ''}>{p}</span>
+                })}
+            </div>
             {
-                this.props.users.map((u: any) => {
+                props.users.map((u: any) => {
                     return <div key={u.id}>
                   <span>
                       <div className={s.item}>
@@ -23,7 +24,7 @@ class Users extends Component <UsersPropsType> {
                       </div>
                       <div>
                           <button
-                              onClick={() => this.props.toggleFollow(u.id)}>{u.followed ? 'Unfollow' : 'Follow'}</button>
+                              onClick={() => props.toggleFollow(u.id)}>{u.followed ? 'Unfollow' : 'Follow'}</button>
                       </div>
                   </span>
                         <span>
@@ -41,6 +42,5 @@ class Users extends Component <UsersPropsType> {
             }
         </div>
     }
-}
 
 export default Users
