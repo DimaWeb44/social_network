@@ -20,11 +20,11 @@ const SET_USERS = 'SET-USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
-export const followAC = (userID: string) => ({type: TOGGLE_FOLLOW, userID})
-export const setUsersAC = (users: Array<UserType>) => ({type: SET_USERS, users})
-export const setCurrentPageAC = (page:number) => ({type: SET_CURRENT_PAGE, page})
-export const setTotalUsersCountAC = (totalCount:number) => ({type: SET_TOTAL_USERS_COUNT, totalCount})
-export const toggleIsFetchingAC = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching})
+export const toggleFollow = (userID: string) => ({type: TOGGLE_FOLLOW, userID})
+export const setUsers = (users: Array<UserType>) => ({type: SET_USERS, users})
+export const setCurrentPage = (page:number) => ({type: SET_CURRENT_PAGE, page})
+export const setTotalUsersCount = (totalCount:number) => ({type: SET_TOTAL_USERS_COUNT, totalCount})
+export const toggleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching})
 
 let initialState: InitialStateType = {
     users: [],
