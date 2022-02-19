@@ -3,7 +3,6 @@ import React from 'react';
 import {addPost, newTextChangeHandler, PostType} from '../../../redux/profile-reducer';
 import MyPosts from './MyPosts';
 import {AppStateType} from '../../../redux/redux-store';
-import {Dispatch} from 'redux';
 
 
 type MapStateToPropsType = {

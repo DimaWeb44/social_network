@@ -14,7 +14,7 @@ import Users from './Users';
 import Preloader from '../common/Preioader/Preloader';
 
 type MapStateToPropsType = {
-    users: Array<UserType>,
+    users: any,
     pageSize: number,
     totalUserCount: number,
     currentPage: number,
@@ -75,25 +75,6 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         isFetching: state.usersPage.isFetching
     }
 }
-/*let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-    return {
-        toggleFollow: (userID: string) => {
-            dispatch(followAC(userID))
-        },
-        setUsers: (users: Array<UserType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (page: number) => {
-            dispatch(setCurrentPageAC(page))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-    }
-}*/
 
 const UsersContaner = connect(mapStateToProps, {
     toggleFollow,

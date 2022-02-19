@@ -3,7 +3,7 @@ import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsConainer";
-import { DialogsType, MessagesType } from "../../redux/dialogs-reducer";
+import {DialogsType, MessagesType} from "../../redux/dialogs-reducer";
 
 
 const Dialogs = (props: DialogsPropsType) => {
