@@ -20,11 +20,11 @@ export type InitialStateType = typeof initialState
 const UPDATE_NEW_MESSAGE_TEXT = 'CHANGE-NEW-MESSAGE-TEXT'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
-export const updateNewMessageTextActionCreator = (text: string): UpdateNewMessageTextActionType => ({
+export const newMessages = (text: string): UpdateNewMessageTextActionType => ({
     type: UPDATE_NEW_MESSAGE_TEXT,
     newTextMessage: text
 })
-export const sendMessageActionCreator = (): SendMessageActionType => ({type: SEND_MESSAGE})
+export const sendMessage = (): SendMessageActionType => ({type: SEND_MESSAGE})
 
 let initialState = {
     dialogs: [

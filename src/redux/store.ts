@@ -1,4 +1,4 @@
-import {ChangeEvent} from "react";
+import React from "react";
 import {v1} from "uuid";
 import dialogsReducer from "./dialogs-reducer";
 import profileReducer from "./profile-reducer";
@@ -13,6 +13,7 @@ let store: StoreType = {
                 {id: '1', message: "Hi Max", likesCount: 33},
                 {id: '1', message: "Hi Don", likesCount: 22}
             ],
+            profile: null
         },
         dialogsPage: {
             dialogs: [
@@ -73,6 +74,7 @@ type  StoreType = {
  type ProfilePageType = {
     posts: Array<PostsType>
     massageForNewPost: string
+     profile: any
 }
  type DialogsPageType = {
     dialogs: Array<DialogsType>

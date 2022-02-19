@@ -1,15 +1,14 @@
 import {connect} from 'react-redux';
 import React, {Component, ReactNode} from 'react';
 import {
-    toggleFollow,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
+    toggleFollow,
     toggleIsFetching,
     UserType
 } from '../../redux/users-reducer';
 import {AppStateType} from '../../redux/redux-store';
-import {Dispatch} from 'redux';
 import axios from 'axios';
 import Users from './Users';
 import Preloader from '../common/Preioader/Preloader';
