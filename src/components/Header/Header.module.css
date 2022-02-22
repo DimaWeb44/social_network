@@ -6,3 +6,12 @@ header {
 .header img {
     width: 50px;
 }
+
+.loginBlock{
+    float: right;
+    color: white;
+}
+
+.loginBlock a{
+    color: white;
+}
