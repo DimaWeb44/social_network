@@ -34,11 +34,13 @@ export const profileReducer = (state: InitialStateType = initialState, action: a
             return {...state, profile: action.profile}
         }
         case ADD_POST: {
-            let newPost: PostType = {id: v1(), message: state.massageForNewPost, likesCount: 0}
-            return {
-                ...state,
-                massageForNewPost: "",
-                posts: [...state.posts, newPost]
+            if (state.massageForNewPost === "") {return {...state} }
+            else {let newPost: PostType = {id: v1(), message: state.massageForNewPost, likesCount: 0}
+                return {
+                    ...state,
+                    massageForNewPost: "",
+                    posts: [...state.posts, newPost]
+                }
             }
         }
         case UPDATE_NEW_POST_TEXT: {

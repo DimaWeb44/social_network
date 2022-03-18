@@ -2,12 +2,12 @@ import React from 'react';
 import s from './Users.module.css'
 import userPhoto from '../../assets/images/icon.png'
 import {NavLink} from 'react-router-dom';
-import { UsersPropsType } from './UsersContainer';
+import {followAPI} from '../../api/api';
 
 
 const Users = (props: any) => {
     let pageCount = Math.ceil(props.totalUserCount / props.pageSize)
-    let page = []
+    let page: number[] = []
     for (let i = 1; i <= pageCount; i++) {
         page.push(i)
     }
@@ -28,7 +28,19 @@ const Users = (props: any) => {
                       </div>
                       <div>
                           <button
-                              onClick={() => props.toggleFollow(u.id)}>{u.followed ? 'Unfollow' : 'Follow'}</button>
+                              onClick={() => {
+                                  u.followed ?
+                                      (followAPI.deleteFollow(u.id).then(data => {
+                                          if (data.resultCode === 0) {
+                                              props.toggleFollow(u.id)
+                                          }
+                                      }))
+                                      : (followAPI.postFollow(u.id).then(data => {
+                                          if (data.resultCode === 0) {
+                                              props.toggleFollow(u.id)
+                                          }
+                                      }))
+                              }}>{u.followed ? 'Unfollow' : 'Follow'}</button>
                       </div>
                   </span>
                     <span>
