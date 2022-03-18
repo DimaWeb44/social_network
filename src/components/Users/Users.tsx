@@ -28,17 +28,21 @@ const Users = (props: any) => {
                       </div>
                       <div>
                           <button
+                              disabled={props.followingInProgress.some((id:string) => id === u.id)}
                               onClick={() => {
+                                  props.toggleFolowingProgress(true, u.id)
                                   u.followed ?
                                       (followAPI.deleteFollow(u.id).then(data => {
                                           if (data.resultCode === 0) {
                                               props.toggleFollow(u.id)
                                           }
+                                          props.toggleFolowingProgress(false, u.id)
                                       }))
                                       : (followAPI.postFollow(u.id).then(data => {
                                           if (data.resultCode === 0) {
                                               props.toggleFollow(u.id)
                                           }
+                                          props.toggleFolowingProgress(false, u.id)
                                       }))
                               }}>{u.followed ? 'Unfollow' : 'Follow'}</button>
                       </div>
