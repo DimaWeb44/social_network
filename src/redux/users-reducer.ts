@@ -1,3 +1,6 @@
+import {Dispatch} from "react"
+import {usersAPI} from "../api/api"
+
 export  type UserType = {
     id: string
     photoURL: string
@@ -32,6 +35,34 @@ export const toggleFolowingProgress = (isFetching: boolean, userId: string) => (
     isFetching,
     userId
 })
+
+export const getUsers = (currentPage: number, pageSize: number) => (dispatch: any) => {
+    dispatch(toggleIsFetching(true))
+    usersAPI.getUsers(currentPage, pageSize).then((data: any) => {
+        dispatch(toggleIsFetching(false))
+        dispatch(setUsers(data.items))
+        dispatch(setTotalUsersCount(data.totalCount))
+    })
+}
+
+export const follow = (followed: boolean, id: string) => (dispatch: any) => {
+    dispatch(toggleFolowingProgress(true, id))
+    followed ?
+        (usersAPI.deleteFollow(id).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(toggleFollow(id))
+            }
+            dispatch(toggleFolowingProgress(false, id))
+        }))
+        : (usersAPI.postFollow(id).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(toggleFollow(id))
+            }
+            dispatch(toggleFolowingProgress(false, id))
+        }))
+
+
+}
 
 let initialState: InitialStateType = {
     users: [],
