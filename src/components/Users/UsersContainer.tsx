@@ -1,13 +1,6 @@
 import {connect} from 'react-redux';
 import React, {Component, ReactNode} from 'react';
-import {
-    getUsers,
-    setCurrentPage,
-    toggleFollow,
-    toggleFolowingProgress,
-    follow,
-    UserType
-} from '../../redux/users-reducer';
+import {follow, getUsers, setCurrentPage, toggleFolowingProgress} from '../../redux/users-reducer';
 import {AppStateType} from '../../redux/redux-store';
 import Users from './Users';
 import Preloader from '../common/Preioader/Preloader';

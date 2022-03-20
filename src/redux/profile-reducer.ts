@@ -1,4 +1,5 @@
 import {v1} from "uuid"
+import { profileAPI } from "../api/api"
 import {ActionsType, AddPostActionType, NewTextChangeHandlerActionType} from "./store"
 
 const ADD_POST = 'ADD-POST'
@@ -10,6 +11,11 @@ export const newTextChangeHandler = (text: string): NewTextChangeHandlerActionTy
     newText: text
 })
 export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile})
+export const getUserProfile = (userID: string) => (dispatch: any) => {
+    profileAPI.getUserId(userID).then((data:any)  => {
+        dispatch(setUserProfile(data))
+    })
+}
 
 export  type InitialStateType = typeof initialState
 export type PostType = {
