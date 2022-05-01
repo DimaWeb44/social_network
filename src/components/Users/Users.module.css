@@ -5,5 +5,6 @@
 }
 
 .selectedPage {
-   font-weight: bold;
+    font-weight: bold;
+    color: brown;
 }

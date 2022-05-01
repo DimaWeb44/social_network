@@ -3,8 +3,8 @@ import Profile from './Profile';
 import {getUserProfile, setUserProfile} from './../../redux/profile-reducer'
 import {AppStateType} from '../../redux/redux-store';
 import {connect} from 'react-redux';
-import {useParams} from 'react-router-dom';
-import {profileAPI} from '../../api/api';
+import {Navigate, useParams} from 'react-router-dom';
+import { withAuthNavigate } from '../../hoc/withAuthRedirect';
 
 
 function ProfileContainer(props: any) {
@@ -20,13 +20,14 @@ function ProfileContainer(props: any) {
     </div>)
 }
 
+let AuthNavigateComponent = withAuthNavigate(ProfileContainer)
+
 let mapStateToProps = (state: AppStateType) => {
     return {
         profile: state.profilePage.profile,
-        isAuth: state.auth.isAuth
     }
 }
 
-export default connect(mapStateToProps, {setUserProfile, getUserProfile})(ProfileContainer)
+export default connect(mapStateToProps, {setUserProfile, getUserProfile})(AuthNavigateComponent)
 
 

@@ -7,7 +7,7 @@ import {DialogsType, MessagesType} from "../../redux/dialogs-reducer";
 import { Navigate } from "react-router-dom";
 
 
-const Dialogs = (props: DialogsPropsType) => {
+function Dialogs(props: DialogsPropsType) {
     let state = props.dialogsPage
     let dialogsElements = state.dialogs.map((d: DialogsType) => <DialogItem key={d.id} name={d.name} id={d.id}/>)
     let messagesElements = state.messages.map((m: MessagesType) => <Message key={m.id} message={m.message} id={m.id}/>)
@@ -19,10 +19,6 @@ const Dialogs = (props: DialogsPropsType) => {
 
     const onSendMessageClik = () => {
         props.sendMessage()
-    }
-
-    if (!props.isAuth) {
-      return  <Navigate to="/login"/>
     }
 
     return (
@@ -44,3 +40,10 @@ const Dialogs = (props: DialogsPropsType) => {
     )
 }
 export default Dialogs
+
+
+
+
+
+
+
