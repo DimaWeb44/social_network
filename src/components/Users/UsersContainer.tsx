@@ -4,6 +4,8 @@ import {follow, getUsers, setCurrentPage, toggleFolowingProgress} from '../../re
 import {AppStateType} from '../../redux/redux-store';
 import Users from './Users';
 import Preloader from '../common/Preioader/Preloader';
+import { compose } from 'redux';
+import { withAuthNavigate } from '../../hoc/withAuthRedirect';
 
 type MapStateToPropsType = {
     users: any,
@@ -61,11 +63,12 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-const UsersContaner = connect(mapStateToProps, {
-    toggleFolowingProgress,
-    setCurrentPage,
-    getUsers,
-    follow
-})(UsersAPIComponent)
-export default UsersContaner
-
+export default  compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        toggleFolowingProgress,
+        setCurrentPage,
+        getUsers,
+        follow
+    }),
+    withAuthNavigate
+)(UsersAPIComponent)

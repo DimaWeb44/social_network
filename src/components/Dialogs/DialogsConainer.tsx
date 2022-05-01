@@ -4,6 +4,7 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import { withAuthNavigate } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 
 type MapStateToPropsType = {
@@ -22,7 +23,8 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         dialogsPage: state.dialogsPage,
     }
 }
-let AuthNavigateComponent = withAuthNavigate(Dialogs)
 
-const DialogsContainer = connect(mapStateToProps, {sendMessage, newMessages})(AuthNavigateComponent)
-export default DialogsContainer
+export default  compose<React.ComponentType>(
+        connect(mapStateToProps, {sendMessage, newMessages}),
+        withAuthNavigate
+    )(Dialogs)

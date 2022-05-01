@@ -5,6 +5,7 @@ import {AppStateType} from '../../redux/redux-store';
 import {connect} from 'react-redux';
 import {Navigate, useParams} from 'react-router-dom';
 import { withAuthNavigate } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 
 function ProfileContainer(props: any) {
@@ -20,7 +21,7 @@ function ProfileContainer(props: any) {
     </div>)
 }
 
-let AuthNavigateComponent = withAuthNavigate(ProfileContainer)
+
 
 let mapStateToProps = (state: AppStateType) => {
     return {
@@ -28,6 +29,11 @@ let mapStateToProps = (state: AppStateType) => {
     }
 }
 
-export default connect(mapStateToProps, {setUserProfile, getUserProfile})(AuthNavigateComponent)
+export default  compose<React.ComponentType>(
+    connect(mapStateToProps, {setUserProfile, getUserProfile}),
+    withAuthNavigate
+)(ProfileContainer)
+
+
 
 

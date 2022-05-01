@@ -13,10 +13,10 @@ const mapStateToPropsForNavigate = (state: AppStateType) => ({
 } as MapPropsType);
 
 export function withAuthNavigate(WrappedComponent: ReactType) {
+
     function NavigateComponent(props: MapPropsType & MapDispatchToPropsType) {
         if (!props.isAuth) return <Navigate to='/login'/>
         return <WrappedComponent {...props}/>
     }
-
     return connect(mapStateToPropsForNavigate)(NavigateComponent);
 }
