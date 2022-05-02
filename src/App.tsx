@@ -6,7 +6,7 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import DialogsContainer from './components/Dialogs/DialogsConainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
-import { Login } from './components/Login/Login';
+import  Login  from './components/Login/Login';
 
 
 function App() {

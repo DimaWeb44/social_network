@@ -13,7 +13,8 @@ let store: StoreType = {
                 {id: '1', message: "Hi Max", likesCount: 33},
                 {id: '1', message: "Hi Don", likesCount: 22}
             ],
-            profile: null
+            profile: null,
+            status: ''
         },
         dialogsPage: {
             dialogs: [
@@ -45,7 +46,7 @@ let store: StoreType = {
         this._callSubscriber = observer
     },
     dispatch(action: ActionsType) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
+       /* this._state.profilePage = profileReducer(this._state.profilePage, action)*/
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
         this._callSubscriber()
@@ -75,6 +76,7 @@ type  StoreType = {
     posts: Array<PostsType>
     massageForNewPost: string
      profile: any
+     status: string
 }
  type DialogsPageType = {
     dialogs: Array<DialogsType>

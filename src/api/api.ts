@@ -32,8 +32,16 @@ export const authAPI = {
 }
 
 export const profileAPI = {
-    getUserId(UserId: any) {
-        return instanse.get(`profile/${UserId}`)
+    getUserId(userId: any) {
+        return instanse.get(`profile/${userId}`)
+            .then(response => response.data)
+    },
+    getUserStatus(userId: any) {
+        return instanse.get(`profile/status/${userId}`)
+            .then(response => response.data)
+    },
+    updateUserStatus(status: any) {
+        return instanse.put(`profile/status`, {status})
             .then(response => response.data)
     }
 }

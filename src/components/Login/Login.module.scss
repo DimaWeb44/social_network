@@ -1,0 +1,111 @@
+.loginForm {
+  grid-area: c;
+  min-height: 100vh;
+  min-width: 375px;
+  max-width: 500px;
+  padding: 20px;
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+.loginForm__info a {
+  color: #3498c0;
+  text-decoration: underline;
+}
+
+.loginForm__title {
+  position: relative;
+  width: auto;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: normal;
+}
+
+.loginForm__ItemsWrap {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  align-self: flex-end;
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 14px 0;
+
+    border-radius: 5px;
+    background-color: rgba(220, 220, 220, 0.2);
+    border: 1px solid rgba(220, 220, 220, 1);
+
+    &:hover,
+    &:focus {
+      outline: none;
+      border-color: gold;
+    }
+  }
+}
+
+.loginForm__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.loginForm__SendWrap {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0 0 0;
+  padding: 0;
+}
+
+.loginForm__loginRemember {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 200px;
+  margin: 0;
+
+  input {
+    position: relative;
+    top: 2px;
+    width: 20px;
+    height: 40px;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+  }
+}
+
+.form__loginBtn {
+  display: flex;
+  justify-content: center;
+  width: 80px;
+  margin: 0;
+  padding: 4px 8px;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+  line-height: 20px;
+  border-radius: 5px;
+  border: 1px solid rgba(154, 205, 50, 1);
+  background-color: rgba(154, 205, 50, 1);
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: rgba(154, 205, 50, 0.8);
+  }
+}
+
+.formSummary__error {
+  position: absolute;
+  top: -164px;
+  left: 160px;
+  padding: 4px 4px;
+  color: #ffffff;
+  border-radius: 5px;
+  background-color: rgba(220, 20, 60, 1);
+  border-color: rgba(220, 20, 60, 1);
+}
