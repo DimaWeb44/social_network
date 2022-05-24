@@ -1,11 +1,9 @@
 import {v1} from "uuid"
-import {
-    ActionsType,
-    SendMessageActionType,
-    UpdateNewMessageTextActionType
-} from "./store"
 
-
+export type SendMessageActionType = {
+    type: 'SEND-MESSAGE'
+    text: string
+}
 export type DialogsType = {
     id: number
     name: string
@@ -17,14 +15,9 @@ export type MessagesType = {
 
 export type InitialStateType = typeof initialState
 
-const UPDATE_NEW_MESSAGE_TEXT = 'CHANGE-NEW-MESSAGE-TEXT'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
-export const newMessages = (text: string): UpdateNewMessageTextActionType => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    newTextMessage: text
-})
-export const sendMessage = (): SendMessageActionType => ({type: SEND_MESSAGE})
+export const sendMessage = (text: string): SendMessageActionType => ({type: SEND_MESSAGE, text})
 
 let initialState = {
     dialogs: [
@@ -41,23 +34,17 @@ let initialState = {
         {id: '3', message: "Rrrr"},
         {id: '4', message: "Gut"},
         {id: '5', message: "Yes"},
-    ] as Array<MessagesType>,
-    textForNewMessage: "",
+    ] as Array<MessagesType>
 }
 
-
-export const dialogsReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+export const dialogsReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case SEND_MESSAGE: {
-            let newMessage: MessagesType = {id: v1(), message: state.textForNewMessage}
+            let newMessage: MessagesType = {id: v1(), message: action.text}
             return {
                 ...state,
-                textForNewMessage: '',
                 messages: [...state.messages, newMessage]
             }
-        }
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            return {...state, textForNewMessage: action.newTextMessage}
         }
         default:
             return state

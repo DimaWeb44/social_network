@@ -21,7 +21,6 @@ const Login = () => (
                 return errors;
             }}
             onSubmit={(values) => {
-                debugger
                 console.log(values)
             }}
             validationSchema={loginFormSchema}>

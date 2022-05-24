@@ -6,11 +6,7 @@ const ADD_POST = 'ADD_POST'
 const UPDATE_NEW_POST_TEXT = 'CHANGE_NEW_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
-export const addPost = (): any => ({type: ADD_POST})
-export const newTextChangeHandler = (text: string): any => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text
-})
+export const addPost = (text: string): any => ({type: ADD_POST, text})
 export const setUserStatus = (status: any) => ({type: SET_STATUS, status})
 export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile})
 export const getUserProfile = (userID: string) => (dispatch: any) => {
@@ -40,7 +36,6 @@ export type PostType = {
 
 let initialState = {
     profile: null,
-    massageForNewPost: "",
     status: '',
     posts: [
         {id: '1', message: "Hi Dima", likesCount: 21},
@@ -55,17 +50,13 @@ export const profileReducer = (state: InitialStateType = initialState, action: a
             return {...state, profile: action.profile}
         }
         case ADD_POST: {
-            if (state.massageForNewPost === "") {return {...state} }
-            else {let newPost: PostType = {id: v1(), message: state.massageForNewPost, likesCount: 0}
+            if (action.text === "") {return {...state} }
+            else {let newPost: PostType = {id: v1(), message: action.text, likesCount: 0}
                 return {
                     ...state,
-                    massageForNewPost: "",
                     posts: [...state.posts, newPost]
                 }
             }
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return {...state, massageForNewPost: action.newText}
         }
         case SET_STATUS: {
             return {...state, status: action.status}

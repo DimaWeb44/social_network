@@ -1,5 +1,4 @@
 import { authAPI } from "../api/api"
-import {ActionsType} from "./store"
 
 export type SetAuthUserDataType = {
     type: 'SET_AUTH_USER_DATA',
