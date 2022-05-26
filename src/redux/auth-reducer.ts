@@ -3,9 +3,10 @@ import { authAPI } from "../api/api"
 export type SetAuthUserDataType = {
     type: 'SET_AUTH_USER_DATA',
     data: {
-        userId: string,
-        email: string,
-        login: string,
+        userId: null | string,
+        email: null | string,
+        login: null | string,
+        isAuth: boolean
     }
 }
 const SET_USER_DATA = 'SET_AUTH_USER_DATA'
@@ -18,12 +19,13 @@ export type InitialStateType = {
 }
 
 
-export const setAuthUserData = (userId: string, email: string, login: string): SetAuthUserDataType => ({
+export const setAuthUserData = (userId: null | string, email: null | string, login: null | string, isAuth: boolean): SetAuthUserDataType => ({
     type: SET_USER_DATA,
     data: {
         userId,
         email,
         login,
+        isAuth
     }
 })
 
@@ -31,7 +33,23 @@ export const getMe = () => (dispatch: any) => {
     authAPI.getMe().then((data: any) => {
         if (data.resultCode === 0) {
             let {id, email, login} = data.data
-            dispatch(setAuthUserData(id, email, login))
+            dispatch(setAuthUserData(id, email, login, true))
+        }
+    })
+}
+
+export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
+    authAPI.login(email, password, rememberMe).then((data: any) => {
+        if (data.data.resultCode === 0) {
+            dispatch(getMe())
+        }
+    })
+}
+
+export const logout = () => (dispatch: any) => {
+    authAPI.logout().then((data: any) => {
+        if (data.data.resultCode === 0) {
+            dispatch(setAuthUserData(null, null, null, false))
         }
     })
 }

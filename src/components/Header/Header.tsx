@@ -15,7 +15,9 @@ const Header = () => {
     return <header className={s.header}>
         <img src={'https://cdn.onlinewebfonts.com/svg/img_197729.png'}/>
         <div className={s.loginBlock}>
-            {data.login ? data.login : <NavLink to={'/login'}>Login</NavLink>}
+            {data.login
+                ? data.login <>
+                : <NavLink to={'/login'}>Login</NavLink>}
         </div>
     </header>
 

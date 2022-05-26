@@ -1,6 +1,7 @@
-import {Field, Form, Formik } from 'formik';
+import {ErrorMessage, Field, Form, Formik } from 'formik';
 import React, {ChangeEvent} from 'react';
 import {PostType} from '../../../redux/profile-reducer';
+import PostFormSchema from '../../FormValidation/PostFormSchema';
 import s from './MyPosts.module.css'
 import {MyPostsPropsType} from './MyPostsContainer';
 import Post from "./Post/Post";
@@ -38,11 +39,20 @@ const AddPostForm = (props: any) => {
             initialValues={{
                 newPostBody: ""
             }}
+            validate={values => {
+                const errors = {};
+                if (!values.newPostBody) {
+                    // @ts-ignore
+                    errors.newPostBody = 'Required';
+                }
+                return errors;
+            }}
             onSubmit={(values, {resetForm}) => {
                 addNewPost(values.newPostBody)
                 resetForm()
             }
             }
+            validationSchema={PostFormSchema}
         >
             {() => (
                 <Form>
@@ -52,6 +62,7 @@ const AddPostForm = (props: any) => {
                             as={'textarea'}
                             placeholder={'enter text'}
                         />
+                        <ErrorMessage name="newPostBody" component="div"/>
                     </div>
                     <button type={'submit'}>Add post</button>
                 </Form>
