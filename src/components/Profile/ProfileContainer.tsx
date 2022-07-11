@@ -12,7 +12,7 @@ function ProfileContainer(props: any) {
     let {userID} = useParams()
     useEffect(() => {
         if (!userID) {
-            userID = '22256'
+            userID = props.userID
         }
         props.getUserProfile(userID)
         props.getUserStatus(userID)
@@ -25,7 +25,9 @@ function ProfileContainer(props: any) {
 let mapStateToProps = (state: AppStateType) => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        userId: state.auth.userId,
+        isAuth: state.auth.isAuth
     }
 }
 

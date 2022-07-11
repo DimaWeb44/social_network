@@ -27,28 +27,27 @@ const Login = (props: any) => {
             }
             return errors;
         }}
-        onSubmit={(values) => {
-            props.login(values.email, values.password, values.rememberMe)
+        onSubmit={(values,{setSubmitting, setStatus}) => {
+            props.login(values.email, values.password, values.rememberMe, setStatus)
+            setSubmitting(false)
         }}
         validationSchema={loginFormSchema}>
-        {() => (
+        {({ errors, touched, isValid, dirty, status, isSubmitting}) => (
             <Form>
                 <div>
                     <Field type={'text'} name={'email'} placeholder={'email'}/>
                 </div>
                 <ErrorMessage name="email" component="div"/>
-
                 <div>
                     <Field type={'password'} name={'password'} placeholder={'password'}/>
                 </div>
                 <ErrorMessage name="password" component="div"/>
-
+                {touched && status}
                 <div>
                     <Field type={'checkbox'} name={'rememberMe'}/>
                     <label htmlFor={'rememberMe'}> remember me </label>
                 </div>
-
-                <button type={'submit'}>Log in</button>
+                <button type={'submit'} disabled={isSubmitting}>Log in</button>
             </Form>
         )}
     </Formik>

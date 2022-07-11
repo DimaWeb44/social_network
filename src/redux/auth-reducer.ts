@@ -38,10 +38,12 @@ export const getMe = () => (dispatch: any) => {
     })
 }
 
-export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
+export const login = (email: string, password: string, rememberMe: boolean, setStatus: any) => (dispatch: any) => {
     authAPI.login(email, password, rememberMe).then((data: any) => {
         if (data.data.resultCode === 0) {
             dispatch(getMe())
+        } else {
+            setStatus(data.data.messages)
         }
     })
 }
@@ -68,7 +70,6 @@ export const authReducer = (state: InitialStateType = initialState, action: SetA
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
             }
         }
         default:
@@ -77,3 +78,4 @@ export const authReducer = (state: InitialStateType = initialState, action: SetA
 }
 
 export default authReducer
+
